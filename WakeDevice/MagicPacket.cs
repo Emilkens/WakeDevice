@@ -23,7 +23,7 @@ namespace WakeDevice
             }
         }
 
-        MagicPacket(PhysicalAddress mac)
+        public MagicPacket(PhysicalAddress mac)
         {
             byte[] GeneratedPayload = new byte[320];
             byte[] Magic = { byte.Parse("255"), byte.Parse("255"), byte.Parse("255"),

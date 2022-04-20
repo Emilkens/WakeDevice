@@ -7,7 +7,8 @@ try
     {
         return;
     }
-
+    TargetEndpoint Endpoint = new(Command.AddressMac, Command.AddressIp, Command.SubnetMask, Command.Ports);
+    MagicPacket Packet = new(Endpoint.Mac);
 }
 catch (Exception ex)
 {
@@ -22,6 +23,4 @@ catch (Exception ex)
 }
 
 
-//Build target object
-//Build magic packet
 //Perform device wake
