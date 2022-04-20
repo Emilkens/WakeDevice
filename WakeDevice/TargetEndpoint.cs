@@ -78,19 +78,19 @@ namespace WakeDevice
         public TargetEndpoint(string mac, string ip, string? mask, List<uint>? ports)
         {
 
-            if (!PhysicalAddress.TryParse(mac, out PhysicalAddress parsedMac))
+            if (!PhysicalAddress.TryParse(mac, out PhysicalAddress? parsedMac))
             {
                 throw new ArgumentException("Invalid MAC address has been specified.");
             }
             Mac = parsedMac;
 
-            if (!IPAddress.TryParse(ip, out IPAddress parsedIp))
+            if (!IPAddress.TryParse(ip, out IPAddress? parsedIp))
             {
                 throw new ArgumentException("Invalid IP address has been specified.");
             }
             AddressIP = parsedIp;
 
-            if (!IPAddress.TryParse(mask, out IPAddress parsedMask))
+            if  (!IPAddress.TryParse(mask, out IPAddress? parsedMask))
             {
                 throw new ArgumentException("Invalid subnet mask has been specified.");
             }
