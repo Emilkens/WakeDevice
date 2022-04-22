@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Net.Sockets;
+
 namespace WakeDevice
 {
     internal class TargetEndpoint
@@ -90,13 +92,46 @@ namespace WakeDevice
             }
             AddressIP = parsedIp;
 
-            if  (!IPAddress.TryParse(mask, out IPAddress? parsedMask))
+            IPAddress? parsedMask = null;
+            if (mask != null && !IPAddress.TryParse(mask, out parsedMask))
             {
                 throw new ArgumentException("Invalid subnet mask has been specified.");
             }
             AddressMask = parsedMask;
 
             AddressPorts = ports;
+        }
+        public void Wake(MagicPacket packet, uint repetitions = 5)
+        {
+            Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+
+            foreach (var port in AddressPorts)
+            {
+                IPAddress DestinationAddress = GetBroadcastAddress();
+                IPEndPoint EndPoint = new(DestinationAddress, (int)port);
+
+                for (int i = 0; i < repetitions; i++)
+                {
+                    // Send data to destination host
+                    s.SendTo(packet.Payload, EndPoint);
+                }
+
+                Console.WriteLine();
+                Console.WriteLine($"Magic packets ({repetitions}) sent to: {DestinationAddress}:{port}");
+            }
+            s.Dispose();
+        }
+
+        private IPAddress GetBroadcastAddress()
+        {
+            byte[] broadcastIPBytes = new byte[4];
+            byte[] hostBytes = _addressIP.GetAddressBytes();
+            byte[] maskBytes = _addressMask.GetAddressBytes();
+            for (int i = 0; i < 4; i++)
+            {
+                broadcastIPBytes[i] = (byte)(hostBytes[i] | (byte)~maskBytes[i]);
+            }
+            return new IPAddress(broadcastIPBytes);
         }
     }
 }
