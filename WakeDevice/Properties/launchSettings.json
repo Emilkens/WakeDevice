@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WakeDevice": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}
