@@ -114,7 +114,7 @@ namespace WakeDevice
         }
         
         /// <summary>
-        /// Wakes target device performing Wake On LAN
+        /// Wakes target device using Wake On LAN mechanism
         /// </summary>
         /// <param name="packet"></param>
         /// <param name="repetitions"></param>
