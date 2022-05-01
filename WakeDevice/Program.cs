@@ -9,7 +9,12 @@ try
     }
     TargetEndpoint Endpoint = new(Command.AddressMac, Command.AddressIp, Command.SubnetMask, Command.Ports);
     MagicPacket Packet = new(Endpoint.Mac);
-    Endpoint.Wake(Packet);
+    if (Command.Repetitions == null)
+    {
+        Endpoint.Wake(Packet);
+        return;
+    }
+    Endpoint.Wake(Packet, Command.Repetitions);
 }
 catch (Exception ex)
 {

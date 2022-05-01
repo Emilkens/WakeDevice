@@ -101,7 +101,7 @@ namespace WakeDevice
 
             AddressPorts = ports;
         }
-        public void Wake(MagicPacket packet, uint repetitions = 5)
+        public void Wake(MagicPacket packet, uint? repetitions = 5)
         {
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
