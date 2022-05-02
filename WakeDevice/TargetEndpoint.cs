@@ -9,6 +9,9 @@ using System.Net.Sockets;
 
 namespace WakeDevice
 {
+    /// <summary>
+    /// Represents target endpoint network data
+    /// </summary>
     internal class TargetEndpoint
     {
         #region Fields
@@ -77,6 +80,14 @@ namespace WakeDevice
         }
         #endregion;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="TargetEndpoint"/>
+        /// </summary>
+        /// <param name="mac"></param>
+        /// <param name="ip"></param>
+        /// <param name="mask"></param>
+        /// <param name="ports"></param>
+        /// <exception cref="ArgumentException"></exception>
         public TargetEndpoint(string mac, string ip, string? mask, List<uint>? ports)
         {
 
@@ -101,6 +112,12 @@ namespace WakeDevice
 
             AddressPorts = ports;
         }
+        
+        /// <summary>
+        /// Wakes target device using Wake On LAN mechanism
+        /// </summary>
+        /// <param name="packet"></param>
+        /// <param name="repetitions"></param>
         public void Wake(MagicPacket packet, uint repetitions = 5)
         {
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -122,6 +139,10 @@ namespace WakeDevice
             s.Dispose();
         }
 
+        /// <summary>
+        /// Generates broadcast address based on provided subnet mask
+        /// </summary>
+        /// <returns>IP address to send packets to</returns>
         private IPAddress GetBroadcastAddress()
         {
             byte[] broadcastIPBytes = new byte[4];
