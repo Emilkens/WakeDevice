@@ -7,7 +7,7 @@ using System.Net.NetworkInformation;
 
 namespace WakeDevice
 {
-    internal class MagicPacket
+    public class MagicPacket
     {
         private byte[] _payload;
 
