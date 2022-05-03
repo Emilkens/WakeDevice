@@ -112,13 +112,13 @@ namespace WakeDevice
 
             AddressPorts = ports;
         }
-        
+      
         /// <summary>
         /// Wakes target device using Wake On LAN mechanism
         /// </summary>
         /// <param name="packet"></param>
         /// <param name="repetitions"></param>
-        public void Wake(MagicPacket packet, uint repetitions = 5)
+        public void Wake(MagicPacket packet, uint? repetitions = 5)
         {
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
