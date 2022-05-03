@@ -8,6 +8,9 @@ using CommandLine;
 
 namespace WakeDevice
 {
+    /// <summary>
+    /// Represents command line parser and parsed data
+    /// </summary>
     internal class Parsing
     {
         private string? _addressMac;
@@ -80,12 +83,21 @@ namespace WakeDevice
                 }        
             }
         }
-
+        
+        /// <summary>
+        /// Initializes a new instance of <see cref="Parsing"/>
+        /// </summary>
+        /// <param name="mac"></param>
         public Parsing(string[] CommandLineArguments)
         {
             ParseInput(CommandLineArguments);
         }
 
+        /// <summary>
+        /// Parses command line input
+        /// </summary>
+        /// <param name="args"></param>
+        /// <exception cref="ArgumentException"></exception>
         public void ParseInput(string[] args)
         {
             var result = Parser.Default.ParseArguments<InputArguments>(args)
@@ -108,7 +120,13 @@ namespace WakeDevice
                 }
             });
         }
-
+        
+        /// <summary>
+        /// Checks whether there are no repeating values inside a collection
+        /// </summary>
+        /// <typeparam name="IEnumerable"></typeparam>
+        /// <param name="Collection"></param>
+        /// <returns>True if collection does not contain repeating values or is null</returns>
         private static bool AreAllElementsUnique<IEnumerable>(IEnumerable<uint> ?Collection)
         {
             if(Collection == null)
@@ -123,7 +141,10 @@ namespace WakeDevice
             return true;
         }
     }
-
+    
+    /// <summary>
+    /// Represents accepted command line arguments and options
+    /// </summary>
     internal class InputArguments
     {
         [Value(index: 0, Required = true, HelpText = "Target MAC Address.", MetaName = "MAC Address")]

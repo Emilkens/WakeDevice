@@ -7,6 +7,9 @@ using System.Net.NetworkInformation;
 
 namespace WakeDevice
 {
+    /// <summary>
+    /// Represents a Wake On LAN magic packet
+    /// </summary>
     internal class MagicPacket
     {
         private byte[] _payload;
@@ -22,7 +25,10 @@ namespace WakeDevice
                     _payload = value; 
             }
         }
-
+        /// <summary>
+        /// Initializes a new instance of <see cref="MagicPacket"/> and generates its payload
+        /// </summary>
+        /// <param name="mac"></param>
         public MagicPacket(PhysicalAddress mac)
         {
             byte[] GeneratedPayload = new byte[320];
