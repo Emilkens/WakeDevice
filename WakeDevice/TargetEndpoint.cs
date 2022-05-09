@@ -122,9 +122,10 @@ namespace WakeDevice
         {
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
+            IPAddress DestinationAddress = GetBroadcastAddress();
+
             foreach (var port in AddressPorts)
             {
-                IPAddress DestinationAddress = GetBroadcastAddress();
                 IPEndPoint EndPoint = new(DestinationAddress, (int)port);
 
                 for (int i = 0; i < repetitions; i++)
