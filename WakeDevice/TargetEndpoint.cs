@@ -16,7 +16,7 @@ namespace WakeDevice
     {
         #region Fields
         private IPAddress _addressIP;
-        private IPAddress _addressMask = IPAddress.Parse("255.255.255.0");
+        private IPAddress _addressMask = IPAddress.Parse("255.255.255.255");
         private List<uint> _addressPorts = new() { 7, 9 };
         private PhysicalAddress _mac;
         #endregion;
