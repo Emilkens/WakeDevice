@@ -11,10 +11,10 @@ try
     MagicPacket Packet = new(Endpoint.Mac);
     if (Command.Repetitions == null)
     {
-        Endpoint.Wake(Packet);
+        Endpoint.Wake(Packet.Payload);
         return;
     }
-    Endpoint.Wake(Packet, Command.Repetitions);
+    Endpoint.Wake(Packet.Payload, Command.Repetitions);
 }
 catch (Exception ex)
 {

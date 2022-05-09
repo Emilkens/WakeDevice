@@ -118,7 +118,7 @@ namespace WakeDevice
         /// </summary>
         /// <param name="packet"></param>
         /// <param name="repetitions"></param>
-        public void Wake(MagicPacket packet, uint? repetitions = 5)
+        public void Wake(byte[] packet, uint? repetitions = 5)
         {
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
@@ -130,7 +130,7 @@ namespace WakeDevice
                 for (int i = 0; i < repetitions; i++)
                 {
                     // Send data to destination host
-                    s.SendTo(packet.Payload, EndPoint);
+                    s.SendTo(packet, EndPoint);
                 }
 
                 Console.WriteLine();
