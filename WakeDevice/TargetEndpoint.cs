@@ -16,7 +16,7 @@ namespace WakeDevice
     {
         #region Fields
         private IPAddress _addressIP;
-        private IPAddress _addressMask = IPAddress.Parse("255.255.255.0");
+        private IPAddress _addressMask = IPAddress.Parse("255.255.255.255");
         private List<uint> _addressPorts = new() { 7, 9 };
         private PhysicalAddress _mac;
         #endregion;
@@ -122,9 +122,10 @@ namespace WakeDevice
         {
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
+            IPAddress DestinationAddress = GetBroadcastAddress();
+
             foreach (var port in AddressPorts)
             {
-                IPAddress DestinationAddress = GetBroadcastAddress();
                 IPEndPoint EndPoint = new(DestinationAddress, (int)port);
 
                 for (int i = 0; i < repetitions; i++)
